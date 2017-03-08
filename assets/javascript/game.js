@@ -1,14 +1,24 @@
+//Variable declared
+//list of words to choose from
 var words = ["rorschach", "drmanhattan", "watchmaker", "silkspectre", "comedian", "nightowl", "compromise", "alanmoore", "davegibbons", "ozymandias", "bubastis", "graphicnovel", "smileyface", "archie", "doomsdayclock"];
+//computer will choose random word
 var word =words[Math.floor(Math.random() * words.length)];
+//an array that will hold placeholders for the letters
 var letterArray=[];
+//for loop that creates the underscores as placeholders for each letter in the chosen word
 		for (var i = 0; i < word.length; i++) {
 			letterArray[i]="_ ";
 		}
+//variable that holds number of wins
 var wins;
+//variable that holds number of guesses left
 var guessesLeft;
+//array that holds which letters were already guessed
 var alreadyGuessed=[];
+//variable that holds how many letters are left to guess in the word
 var remainingLetters=word.length;
 
+//when the HTML loads
 window.onload=function setScreen() {
 //establish number of wins so far
 		wins=0;
@@ -17,69 +27,79 @@ window.onload=function setScreen() {
 		guessesLeft=15;
 		document.getElementById("guessesLeft").innerHTML= guessesLeft;
 		console.log(word);
-//prints the letterArray into the <div>
+//prints the letterArray into the <div>--THEORETICALLY
 		document.getElementById("currentWord").innerHTML= letterArray;
 		console.log(letterArray);
-		alert(letterArray);
+		//alert(letterArray);
 }	
 
 
-
+//when user presses key
 document.onkeyup=function() {
+//variable that holds the key pressed 
 	var userGuess=event.key;
+//changes the guess to lower case
 	userGuess=String.fromCharCode(event.keyCode).toLowerCase();
+
 	console.log(userGuess);
-	
+
+//each time user presses a key, their number of guesses decreases by 1
 	guessesLeft=guessesLeft-1;
 	document.getElementById("guessesLeft").innerHTML=guessesLeft;
 
+
+//for loop that dictates that each time a key is pressed, the key must be compared to each letter in the current word
 		for (var i = 0; i < word.length; i++) {
+//if the letter is equal to one of the letters in the word
 			if(word[i] === userGuess) {
+//the placeholder at that index should be replaced by the user's input
 				letterArray[i] = userGuess;
-				//alert("correct letter!");
 				console.log(letterArray);
+//print changes to the HTML--THEORETICALLY
 				document.getElementById("currentWord").innerHTML=letterArray[i];
+//number of remaining letters to be guessed decreases by 1
 				remainingLetters--;
 				console.log(remainingLetters);
 			}
+//if the letter guessed does not appear anywhere in the word
 			else if (word[i] !== userGuess) {
+//that letter will be pushed to the array alreadyGuessed and displayed
 				alreadyGuessed.push(" " + userGuess);
 				document.getElementById("alreadyGuessed").innerHTML=alreadyGuessed;
 			}
-			
-		}
-			
-			
-		}
+		}			
+}
 
-		if (guessesLeft==0) {
+//ending the game: if user runs out of guesses, they are alerted
+	if (guessesLeft==0) {
 			alert("Game Over!");
-		}
+	}
 
-		if (remainingLetters==0) {
-			alert("Hurm...you got a word.");
-//establish number of wins so far
-			wins=wins+1;
-			document.getElementById("noOfWins").innerHTML=wins;
-//make computer pick a new word
-			word=words[Math.floor(Math.random() * words.length)];
-			console.log(word);
+//switching to the next word: if the user has guessed all the letters for that word
+	if (remainingLetters==0) {
+//they are alerted by Rorschach
+		alert("Hurm...you got a word.");
+//number of wins resets
+		wins=wins+1;
+		document.getElementById("noOfWins").innerHTML=wins;
 //reset the number of letters remaining
-			remainingLetters=word.length;
-		//console.log(remainingLetters);
+		remainingLetters=word.length;
 //wrong letters array emptied
-			alreadyGuessed=[];
-			document.getElementById("alreadyGuessed").innerHTML=alreadyGuessed;
-//establish guesses remaining and innerHTML to proper <div>
-			guessesLeft=15;
-			document.getElementById("guessesLeft").innerHTML=guessesLeft;
+		alreadyGuessed=[];
+		document.getElementById("alreadyGuessed").innerHTML=alreadyGuessed;
+//number of guesses remaining resets
+		guessesLeft=15;
+		document.getElementById("guessesLeft").innerHTML=guessesLeft;
+//computer picks a new word
+		word=words[Math.floor(Math.random() * words.length)];
+		console.log(word);
 //replaces letters with underscores		
-			for (var i = 0; i < word.length; i++) {
+		for (var i = 0; i < word.length; i++) {
 			letterArray[i] = "_ ";
-//prints the letterArray into the <div>
+//prints the new letterArray into the <div>--THEORETICALLY
 			document.getElementById("currentWord").innerHTML+=letterArray[i];
 		}	
-		}
+	}
 
 
 
