@@ -1,5 +1,64 @@
+* {
+	box-sizing:border-box;
+}
+body {
+	background:url(../images/nostalgia.png);
+}
+
+#game {
+	background-color:black;
+	width:70%;
+	margin-left:auto;
+	margin-right:auto;
+	border: 1px solid yellow;
+}
 h1, h3, #letters {
 	text-align:center;
-	font-size:50px;
 	line-height:1.5;
+	color:yellow;
+}
+
+@font-face {
+	font-family: "watchmen";
+	src:url(../images/watchmen.ttf);
+}
+
+@font-face {
+	font-family:"OilBats";
+	src:url(../images/OilBats.ttf);
+}
+
+h1 {
+	padding-top:10px;
+	font-family: "watchmen";
+	font-size:80px;
+}
+
+h1 p {
+	font-size:50px;
+}
+
+hr {
+	border: 1px solid yellow;
+}
+
+h3 {
+	font-family: 'OilBats', 'Arial';
+	font-size:30px;
+}
+
+#letters {
+	font-size:30px;
+	font-family:"OilBats", 'Arial';
+
+}
+
+img {
+	margin-top:20px;
+	height:20%;
+	width:100%;
+}
+
+.currentWord {
+	color:green;
 }
