@@ -28,7 +28,7 @@ window.onload=function setScreen() {
 		document.getElementById("guessesLeft").innerHTML= guessesLeft;
 		console.log(word);
 //prints the letterArray into the <div>--THEORETICALLY
-		document.getElementById("currentWord").innerHTML= letterArray;
+		document.getElementById("currentWord").innerHTML= letterArray.join(" ");
 		console.log(letterArray);
 		//alert(letterArray);
 }	
@@ -51,16 +51,15 @@ document.onkeyup=function() {
 		for (var i = 0; i < word.length; i++) {
 //if the letter is equal to one of the letters in the word
 			if(word[i] === userGuess) {
-//the placeholder at that index should be replaced by the user's input
-				letterArray[i] = userGuess;
-				console.log(letterArray);
-				alert(letterArray);
-//print changes to the HTML--THEORETICALLY
-				document.getElementById("currentWord").innerHTML= letterArray;
 //number of remaining letters to be guessed decreases by 1
 				remainingLetters--;
 				console.log(remainingLetters);
-
+//the placeholder at that index should be replaced by the user's input
+				letterArray[i] = userGuess;
+				console.log(letterArray);
+				//alert(letterArray);
+//print changes to the HTML--THEORETICALLY
+				document.getElementById("currentWord").innerHTML= letterArray.join(" ");
 			}
 		}
 //if the letter guessed does not appear anywhere in the word
@@ -81,16 +80,16 @@ document.onkeyup=function() {
 //number of guesses remaining resets
 		guessesLeft=15;
 		document.getElementById("guessesLeft").innerHTML=guessesLeft;
+//reset the number of letters remaining
+		remainingLetters=word.length;
 //computer picks a new word
 		word=words[Math.floor(Math.random() * words.length)];
 		console.log(word);
-//reset the number of letters remaining
-		remainingLetters=word.length;
 //replaces letters with underscores		
 		for (var i = 0; i < word.length; i++) {
 			letterArray[i] = "_ ";
 //prints the new letterArray into the <div>--THEORETICALLY
-			document.getElementById("currentWord").innerHTML+=letterArray[i];
+			document.getElementById("currentWord").innerHTML=letterArray.join(" ");
 		}	
 	}
 
@@ -108,16 +107,16 @@ document.onkeyup=function() {
 //number of guesses remaining resets
 		guessesLeft=15;
 		document.getElementById("guessesLeft").innerHTML=guessesLeft;
+//reset the number of letters remaining
+		remainingLetters=word.length;
 //computer picks a new word
 		word=words[Math.floor(Math.random() * words.length)];
 		console.log(word);
-//reset the number of letters remaining
-		remainingLetters=word.length;
 //replaces letters with underscores		
 		for (var i = 0; i < word.length; i++) {
 			letterArray[i] = "_ ";
 //prints the new letterArray into the <div>--THEORETICALLY
-			document.getElementById("currentWord").innerHTML+=letterArray[i];
+			document.getElementById("currentWord").innerHTML=letterArray.join(" ");
 		}	
 	}
 
